@@ -14,7 +14,7 @@ public class UserRepository : IUser
     }
     public async Task<bool> Create(UserDto user)
     {
-        var result = await _appDbContext.Users.FindAsync(user);
+        var result = await _appDbContext.User.FindAsync(user.Id);
         if (result != null) 
         {
             throw new Exception("User already exist");
@@ -22,11 +22,12 @@ public class UserRepository : IUser
         
         var NewUser= new User 
         { 
+            Id = user.Id,
             UserName = user.UserName,
             Email = user.Email,
             Password = user.Password
         };
-        await _appDbContext.Users.AddAsync(NewUser);
+        await _appDbContext.User.AddAsync(NewUser);
         _appDbContext.SaveChanges();
         return true;
     }
