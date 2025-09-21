@@ -2,6 +2,7 @@
 using Application.Interface;
 using DomainLayer.Entities;
 using Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repository;
 
@@ -14,15 +15,8 @@ public class UserRepository : IUser
     }
     public async Task<bool> Create(UserDto user)
     {
-        var result = await _appDbContext.User.FindAsync(user.Id);
-        if (result != null) 
+        var NewUser = new User
         {
-            throw new Exception("User already exist");
-        }
-        
-        var NewUser= new User 
-        { 
-            Id = user.Id,
             UserName = user.UserName,
             Email = user.Email,
             Password = user.Password
@@ -32,18 +26,37 @@ public class UserRepository : IUser
         return true;
     }
 
-    public Task<string> Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        throw new NotImplementedException();
+       var result = await _appDbContext.User.FindAsync(id);
+        if (result == null)
+         {
+              throw new Exception("User not found");
+        }   
+        _appDbContext.User.Remove(result);
+        await _appDbContext.SaveChangesAsync();
+        return true;
     }
 
-    public Task<IEnumerable<User>> GetAll()
+    public async Task<List<User>> GetAll()
     {
-        throw new NotImplementedException();
+       return await _appDbContext.User.ToListAsync();
     }
 
-    public Task<string> Update(int id, UserDto user)
+    public async Task<bool> Update(int id, UserDto user)
     {
-        throw new NotImplementedException();
+        var existingUser = await _appDbContext.User.FindAsync(id);
+        if (existingUser == null)
+        {
+            throw new Exception("User not found");
+        }
+
+        existingUser.UserName = user.UserName;
+        existingUser.Email = user.Email;
+        existingUser.Password = user.Password;
+
+        _appDbContext.User.Update(existingUser);
+        await _appDbContext.SaveChangesAsync();
+        return true;
     }
 }

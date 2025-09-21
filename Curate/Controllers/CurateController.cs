@@ -24,5 +24,34 @@ namespace Curate.Controllers
             }
             return BadRequest("User creation failed");
         }
+
+        [HttpPut("UpdateUser/{id}")]
+        public async Task<IActionResult> UpdateUser(int id, UserDto user)
+        {
+            var result = await _user.Update(id, user);
+            if (!result)
+            {
+                return BadRequest("User update failed");
+            }
+            return Ok(result);
+        }
+
+        [HttpDelete("DeleteUser/{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            var result = await _user.Delete(id);
+            if (!result)
+            {
+                return BadRequest("User deletion failed");
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("GetAllUsers")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var result = await _user.GetAll();
+            return Ok(result);
+        }
     }
 }

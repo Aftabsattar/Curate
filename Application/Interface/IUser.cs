@@ -6,7 +6,7 @@ namespace Application.Interface;
 public interface IUser
 {
     Task<bool> Create(UserDto user);
-    Task<string> Update(int id , UserDto user);
-    Task<string> Delete(int id);
-    Task<IEnumerable<User>> GetAll();
+    Task<bool> Update(int id , UserDto user);
+    Task<bool> Delete(int id);
+    Task<List<User>> GetAll();
 }
