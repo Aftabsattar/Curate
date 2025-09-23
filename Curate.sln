@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36408.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Curate", "Curate\Curate.csproj", "{854CCF41-BDC5-4738-B49E-FA5BCBB589B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Curate.Presentation", "Curate\Curate.Presentation.csproj", "{854CCF41-BDC5-4738-B49E-FA5BCBB589B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainLayer", "DomainLayer\DomainLayer.csproj", "{B2D2F4E8-4867-408B-BF64-18C24CB4FC56}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Curate.Domain", "DomainLayer\Curate.Domain.csproj", "{B2D2F4E8-4867-408B-BF64-18C24CB4FC56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{0406677A-67AC-4053-B77F-027D0FA2091E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Curate.Application", "Application\Curate.Application.csproj", "{0406677A-67AC-4053-B77F-027D0FA2091E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{A2903CFF-7149-43DD-9AF7-0E3ABD4EDE71}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Curate.Infrastructure", "Infrastructure\Curate.Infrastructure.csproj", "{A2903CFF-7149-43DD-9AF7-0E3ABD4EDE71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

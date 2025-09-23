@@ -26,14 +26,9 @@ public class UserRepository : IUser
         return true;
     }
 
-    public async Task<bool> Delete(int id)
+    public async Task<bool> Delete(User existUser)
     {
-       var result = await _appDbContext.User.FindAsync(id);
-        if (result == null)
-         {
-              throw new Exception("User not found");
-        }   
-        _appDbContext.User.Remove(result);
+        _appDbContext.User.Remove(existUser);
         await _appDbContext.SaveChangesAsync();
         return true;
     }
@@ -43,19 +38,25 @@ public class UserRepository : IUser
        return await _appDbContext.User.ToListAsync();
     }
 
-    public async Task<bool> Update(int id, UserDto user)
+    public async Task<User> GetByEmail(string email)
     {
-        var existingUser = await _appDbContext.User.FindAsync(id);
-        if (existingUser == null)
-        {
-            throw new Exception("User not found");
-        }
+        var result = await _appDbContext.User.FirstOrDefaultAsync(u => u.Email == email);
+        return result;
+    }
 
-        existingUser.UserName = user.UserName;
-        existingUser.Email = user.Email;
-        existingUser.Password = user.Password;
+    public async Task<User> GetById(int id)
+    {
+        var result = await _appDbContext.User.FirstOrDefaultAsync(u => u.Id == id);
+        return result;
+    }
 
-        _appDbContext.User.Update(existingUser);
+    public async Task<bool> Update(int id, User existUser, UserDto user)
+    {
+        existUser.UserName = user.UserName;
+        existUser.Email = user.Email;
+        existUser.Password = user.Password;
+
+        _appDbContext.User.Update(existUser);
         await _appDbContext.SaveChangesAsync();
         return true;
     }
